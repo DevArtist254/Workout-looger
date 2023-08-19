@@ -11,15 +11,16 @@ html {
 }
 
 :root{
- --pri-color: #17181D;
- --sec-color: #292C36;
- --running: #E09145;
- --cycling: #FCD9B8;
+ --pri-color: #1B2727;
+ --sec-color: #3C5148;
+ --tri-color: #D5DDDF;
+ --running: #FCBB6D;
+ --cycling: #EE4540;
  --pri-font-fam: 'Lato', sans-serif;
 } 
 
 body{
-    background-color: var(--cycling);
+    background-color: var(--tri-color);
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -111,4 +112,12 @@ body{
 input {
     width: 80px;
     height: 20px;
+}
+
+.bdr-running{
+    border-left: 5px solid var(--running);
+}
+
+.bdr-cycling{
+    border-left: 5px solid var(--cycling);
 }
