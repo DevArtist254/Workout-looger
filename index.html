@@ -12,9 +12,52 @@
     <div class="content-area">
       <div class="sidebar">
         <div class="logo">Workout looger</div>
-        <form class="content-creator"></form>
-        <div class="workouts"></div>
-        <div class="footer"></div>
+        <form class="content-creator">
+          <div class="">
+            <label for="type-selecting">Type</label>
+            <select name="type" id="type-selecting">
+              <option value="cycling">cycling</option>
+              <option value="running">running</option>
+            </select>
+          </div>
+          <div class="">
+            <label for="duration">duration</label>
+            <input type="number" placeholder="min" />
+          </div>
+          <div class="">
+            <label for="distance">distance</label>
+            <input type="number" placeholder="km" />
+          </div>
+          <div class="">
+            <label for="cadence">cadence</label>
+            <input type="number" placeholder="step/min" />
+          </div>
+          <div class="">
+            <label for="Elev gain">Elev gain</label>
+            <input type="number" placeholder="meters" />
+          </div>
+        </form>
+        <div class="workouts">
+          <div class="workout">
+            <div class="workout__title">Running on August</div>
+            <div class="workout__details">
+              <div class="workout__details--distance">🏃‍♂️ 1 KM</div>
+              <div class="workout__details--duration">⏱ 1 MIN</div>
+              <div class="workout__details--speed">⚡️ 60.0 KM/H</div>
+              <div class="workout__details--elevation">🦶🏼 4 SPM</div>
+            </div>
+          </div>
+          <div class="workout">
+            <div class="workout__title">Cycling on August</div>
+            <div class="workout__details">
+              <div class="workout__details--distance">🚴‍♀️ 1 KM</div>
+              <div class="workout__details--duration">🦶🏼 1 MIN</div>
+              <div class="workout__details--speed">⚡️ 60.0 KM/H</div>
+              <div class="workout__details--cadence">⛰ 1 M</div>
+            </div>
+          </div>
+        </div>
+        <div class="footer">&copy; Copyright by <a href="#">Devartist</a></div>
       </div>
       <div id="map"></div>
     </div>
