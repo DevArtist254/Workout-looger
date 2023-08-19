@@ -1,0 +1,114 @@
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 100%;
+}
+
+:root{
+ --pri-color: #17181D;
+ --sec-color: #292C36;
+ --running: #E09145;
+ --cycling: #FCD9B8;
+ --pri-font-fam: 'Lato', sans-serif;
+} 
+
+body{
+    background-color: var(--cycling);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.content-area {
+    width: 98vw;
+    height: 95%;
+    background-color: #fff;
+}
+
+.sidebar{
+    width: 35%;
+    height: 100%;
+    background-color: var(--pri-color);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo{
+    font-family: var(--pri-font-fam);
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.content-creator{
+    width: 80%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+
+    background-color: var(--sec-color);
+    border-radius: 5px;
+
+    padding: 1rem 2rem;
+
+    margin-bottom: 0.5rem;
+}
+.workouts{
+    width: 80%;
+    height: 50%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.workout {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    background-color: var(--sec-color);
+    border-radius: 5px;
+
+    padding: 1rem 2rem;
+
+    margin-bottom: 0.5rem;
+}
+
+.workout__title {
+    font-family: var(--pri-font-fam);
+    font-weight: 400;
+    font-size: 1.2rem;
+}
+
+.workout__details {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    font-family: var(--pri-font-fam);
+    font-weight: 300;
+    font-size: 1rem;
+}
+
+.content-creator__input {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-family: var(--pri-font-fam);
+    font-weight: 400;
+    font-size: 1rem;
+}
+
+input {
+    width: 80px;
+    height: 20px;
+}

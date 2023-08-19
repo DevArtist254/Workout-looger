@@ -5,37 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Workout logger</title>
   </head>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400&display=swap"
+    rel="stylesheet"
+  />
   <link rel="stylesheet" href="style.css" />
 
   <script defer src="./script.js"></script>
   <body>
     <div class="content-area">
       <div class="sidebar">
-        <div class="logo">Workout looger</div>
+        <div class="logo">l🏃‍♂️🚴‍♀️ger</div>
         <form class="content-creator">
-          <div class="">
+          <div class="content-creator__input">
             <label for="type-selecting">Type</label>
             <select name="type" id="type-selecting">
               <option value="cycling">cycling</option>
               <option value="running">running</option>
             </select>
           </div>
-          <div class="">
+          <div class="content-creator__input">
             <label for="duration">duration</label>
             <input type="number" placeholder="min" />
           </div>
-          <div class="">
+          <div class="content-creator__input">
             <label for="distance">distance</label>
             <input type="number" placeholder="km" />
           </div>
-          <div class="">
+          <div class="content-creator__input">
             <label for="cadence">cadence</label>
             <input type="number" placeholder="step/min" />
           </div>
-          <div class="">
+          <!-- <div class="content-creator__input">
             <label for="Elev gain">Elev gain</label>
             <input type="number" placeholder="meters" />
-          </div>
+          </div> -->
         </form>
         <div class="workouts">
           <div class="workout">
