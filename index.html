@@ -28,7 +28,7 @@
     <div class="content">
       <div class="sidebar">
         <div class="logo">l🏃‍♂️🚴‍♀️ger</div>
-        <form class="content-creator">
+        <form class="content-creator" id="form">
           <div class="content-creator__input">
             <label for="type-selecting">Type</label>
             <select name="type" id="type-selecting">
@@ -38,20 +38,21 @@
           </div>
           <div class="content-creator__input">
             <label for="duration">Duration</label>
-            <input type="number" placeholder="min" />
+            <input type="number" placeholder="min" id="durationInput" />
           </div>
           <div class="content-creator__input">
             <label for="distance">Distance</label>
-            <input type="number" placeholder="km" />
+            <input type="number" placeholder="km" id="distanceInput" />
           </div>
-          <div class="content-creator__input cadence">
+          <div class="content-creator__input cadence cadenceHidden">
             <label for="cadence">Cadence</label>
-            <input type="number" placeholder="step/min" />
+            <input type="number" placeholder="step/min" id="cadenceInput" />
           </div>
-          <div class="content-creator__input elevation elevHidden">
+          <div class="content-creator__input elevation">
             <label for="Elev gain">Elev gain</label>
-            <input type="number" placeholder="meters" />
+            <input type="number" placeholder="meters" id="'elevationInput" />
           </div>
+          <input type="submit" style="display: none" />
         </form>
         <div class="workouts">
           <!-- <div class="workout bdr-running">
