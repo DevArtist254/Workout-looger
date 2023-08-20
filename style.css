@@ -141,3 +141,11 @@ input {
     top: 0;
     left: 0;
 }
+
+.cadenceHidden {
+    display: none;
+}
+
+.elevHidden {
+    display: none;
+}
