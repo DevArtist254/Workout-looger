@@ -25,35 +25,36 @@
   ></script>
   <script defer src="./script.js"></script>
   <body>
-    <div class="sidebar">
-      <div class="logo">l🏃‍♂️🚴‍♀️ger</div>
-      <form class="content-creator">
-        <div class="content-creator__input">
-          <label for="type-selecting">Type</label>
-          <select name="type" id="type-selecting">
-            <option value="cycling">cycling</option>
-            <option value="running">running</option>
-          </select>
-        </div>
-        <div class="content-creator__input">
-          <label for="duration">duration</label>
-          <input type="number" placeholder="min" />
-        </div>
-        <div class="content-creator__input">
-          <label for="distance">distance</label>
-          <input type="number" placeholder="km" />
-        </div>
-        <div class="content-creator__input">
-          <label for="cadence">cadence</label>
-          <input type="number" placeholder="step/min" />
-        </div>
-        <!-- <div class="content-creator__input">
+    <div class="content">
+      <div class="sidebar">
+        <div class="logo">l🏃‍♂️🚴‍♀️ger</div>
+        <form class="content-creator">
+          <div class="content-creator__input">
+            <label for="type-selecting">Type</label>
+            <select name="type" id="type-selecting">
+              <option value="cycling">cycling</option>
+              <option value="running">running</option>
+            </select>
+          </div>
+          <div class="content-creator__input">
+            <label for="duration">duration</label>
+            <input type="number" placeholder="min" />
+          </div>
+          <div class="content-creator__input">
+            <label for="distance">distance</label>
+            <input type="number" placeholder="km" />
+          </div>
+          <div class="content-creator__input">
+            <label for="cadence">cadence</label>
+            <input type="number" placeholder="step/min" />
+          </div>
+          <!-- <div class="content-creator__input">
             <label for="Elev gain">Elev gain</label>
             <input type="number" placeholder="meters" />
           </div> -->
-      </form>
-      <div class="workouts">
-        <!-- <div class="workout bdr-running">
+        </form>
+        <div class="workouts">
+          <!-- <div class="workout bdr-running">
             <div class="workout__title">Running on August</div>
             <div class="workout__details">
               <div class="workout__details--distance">🏃‍♂️ 1 KM</div>
@@ -71,9 +72,12 @@
               <div class="workout__details--cadence">⛰ 1 M</div>
             </div>
           </div> -->
+        </div>
+        <div class="footer">&copy; Copyright by <a href="#">Devartist</a></div>
       </div>
-      <div class="footer">&copy; Copyright by <a href="#">Devartist</a></div>
+      <div class="content-map">
+        <div id="map"></div>
+      </div>
     </div>
-    <div id="map"></div>
   </body>
 </html>
