@@ -101,12 +101,12 @@ class App {
 
     const coords = [lat, lng];
 
-    // this.#map = L.map('map').setView(coords, this.#zoomLevel);
+    this.#map = L.map('map').setView(coords, this.#zoomLevel);
 
-    // L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-    //   attribution:
-    //     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    // }).addTo(this.#map);
+    L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(this.#map);
   }
 
   _workoutLogger(e) {
