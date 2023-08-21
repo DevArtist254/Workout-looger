@@ -36,20 +36,20 @@ class Workout {
 }
 
 class Running extends Workout {
-  constructor(distance, duration, typed, elevation) {
+  constructor(distance, duration, typed, cadence) {
     super(distance, duration);
     this.typed = typed;
-    this.elevation = elevation;
+    this.cadence = cadence;
     this.description();
     this.speed();
   }
 }
 
 class Cycling extends Workout {
-  constructor(distance, duration, typed, cadence) {
+  constructor(distance, duration, typed, elevation) {
     super(distance, duration);
     this.typed = typed;
-    this.cadence = cadence;
+    this.elevation = elevation;
     this.description();
     this.speed();
   }
@@ -118,23 +118,34 @@ class App {
 
     const distance = +distanceInput.value;
     const duration = +durationInput.value;
+    console.log();
+    console.log();
     let workout;
 
     if (this.#selectedWorkout === 'cycling') {
-      const elev = 3;
-      if (!numberChecker([distance, duration, elev]))
+      const elevation = +elevationInput.value;
+      if (!numberChecker([distance, duration, elevation]))
         return alert('Please enter a number!');
 
-      workout = new Cycling(distance, duration, this.#selectedWorkout, elev);
+      workout = new Cycling(
+        distance,
+        duration,
+        this.#selectedWorkout,
+        elevation
+      );
+
+      console.log(workout);
     }
 
     if (this.#selectedWorkout === 'running') {
-      const cadence = 5;
+      const cadence = +cadenceInput.value;
 
       if (!numberChecker([distance, duration, cadence]))
         return alert('Please enter a number!');
 
       workout = new Running(distance, duration, this.#selectedWorkout, cadence);
+
+      console.log(workout);
     }
 
     this.#workouts.push(workout);
