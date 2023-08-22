@@ -5,7 +5,8 @@ class Workout {
   hours = new Date().getHours();
   minutes = new Date().getMinutes();
 
-  constructor(distance, duration) {
+  constructor(selectedlatlng, distance, duration) {
+    this.selectedlatlng = selectedlatlng;
     this.distance = distance;
     this.duration = duration;
   }
@@ -36,8 +37,8 @@ class Workout {
 }
 
 class Running extends Workout {
-  constructor(distance, duration, typed, cadence) {
-    super(distance, duration);
+  constructor(selectedlatlng, distance, duration, typed, cadence) {
+    super(selectedlatlng, distance, duration);
     this.typed = typed;
     this.cadence = cadence;
     this.description();
@@ -46,8 +47,8 @@ class Running extends Workout {
 }
 
 class Cycling extends Workout {
-  constructor(distance, duration, typed, elevation) {
-    super(distance, duration);
+  constructor(selectedlatlng, distance, duration, typed, elevation) {
+    super(selectedlatlng, distance, duration);
     this.typed = typed;
     this.elevation = elevation;
     this.description();
@@ -59,6 +60,7 @@ const workoutSelector = document.getElementById('type-selecting');
 const cadenceArea = document.querySelector('.cadence');
 const elevArea = document.querySelector('.elevation');
 const workoutsArea = document.querySelector('.workouts');
+const mapArea = document.querySelector('#map');
 
 const form = document.getElementById('form');
 const durationInput = document.getElementById('durationInput');
@@ -69,7 +71,7 @@ const elevationInput = document.getElementById('elevationInput');
 class App {
   #selectedWorkout = 'cycling';
   #map;
-  #currentCoords;
+  #selectedCoords;
   #zoomLevel = 13;
   #workouts = [];
   constructor() {
@@ -107,6 +109,15 @@ class App {
       attribution:
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(this.#map);
+
+    this.#map.on('click', this._showForm.bind(this));
+  }
+
+  _showForm(e) {
+    const {lat, lng} = e.latlng;
+
+    this.#selectedCoords = [lat, lng];
+    form.classList.remove('formHidden');
   }
 
   _workoutLogger(e) {
@@ -128,6 +139,7 @@ class App {
         return alert('Please enter a number!');
 
       workout = new Cycling(
+        this.#selectedCoords,
         distance,
         duration,
         this.#selectedWorkout,
@@ -143,7 +155,13 @@ class App {
       if (!numberChecker([distance, duration, cadence]))
         return alert('Please enter a number!');
 
-      workout = new Running(distance, duration, this.#selectedWorkout, cadence);
+      workout = new Running(
+        this.#selectedCoords,
+        distance,
+        duration,
+        this.#selectedWorkout,
+        cadence
+      );
 
       console.log(workout);
     }
@@ -151,6 +169,10 @@ class App {
     this.#workouts.push(workout);
 
     this._renderWorkout(workout);
+
+    this._renderWorkoutMarker(workout);
+
+    this._hideForm();
   }
 
   _toggleBtwnRunningCycling(e) {
@@ -213,6 +235,28 @@ class App {
     }
 
     workoutsArea.insertAdjacentHTML('beforeend', html);
+  }
+
+  _renderWorkoutMarker(workout) {
+    L.marker(workout.selectedlatlng)
+      .addTo(this.#map)
+      .bindPopup(
+        L.popup({
+          maxWidth: 250,
+          minWidth: 100,
+          autoClose: false,
+          closeOnClick: false,
+          className: `${workout.typed}-popup`,
+        })
+      )
+      .setPopupContent(
+        `${workout.type === 'cycling' ? `🚴‍♀️` : `🏃‍♂️`} ${workout.description()}`
+      )
+      .openPopup();
+  }
+
+  _hideForm() {
+    form.classList.add('formHidden');
   }
 }
 
