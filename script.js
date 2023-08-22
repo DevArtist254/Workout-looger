@@ -26,13 +26,13 @@ class Workout {
       'Dec',
     ];
 
-    return `on ${this.date}/${months[this.month]} at ${this.hours}:${
-      this.minutes
-    }`;
+    this.description = `on ${this.date}/${months[this.month]} at ${
+      this.hours
+    }:${this.minutes}`;
   }
 
   speed() {
-    return this.distance / this.duration;
+    this.speed = this.distance / this.duration;
   }
 }
 
@@ -77,6 +77,8 @@ class App {
   constructor() {
     this._getCurrentLocation();
 
+    this._initLocalStorage();
+
     form.addEventListener('submit', this._workoutLogger.bind(this));
 
     workoutSelector.addEventListener(
@@ -111,6 +113,12 @@ class App {
     }).addTo(this.#map);
 
     this.#map.on('click', this._showForm.bind(this));
+
+    if (!this.#workouts) return;
+
+    this.#workouts.forEach((workout) => {
+      this._renderWorkoutMarker(workout);
+    });
   }
 
   _showForm(e) {
@@ -129,8 +137,6 @@ class App {
 
     const distance = +distanceInput.value;
     const duration = +durationInput.value;
-    console.log();
-    console.log();
     let workout;
 
     if (this.#selectedWorkout === 'cycling') {
@@ -145,8 +151,6 @@ class App {
         this.#selectedWorkout,
         elevation
       );
-
-      console.log(workout);
     }
 
     if (this.#selectedWorkout === 'running') {
@@ -162,8 +166,6 @@ class App {
         this.#selectedWorkout,
         cadence
       );
-
-      console.log(workout);
     }
 
     this.#workouts.push(workout);
@@ -173,6 +175,8 @@ class App {
     this._renderWorkoutMarker(workout);
 
     this._hideForm();
+
+    this._setWorkoutLS();
   }
 
   _toggleBtwnRunningCycling(e) {
@@ -193,9 +197,9 @@ class App {
     if (workout.typed === 'running') {
       html = `
     <div class="workout bdr-${workout.typed}">
-            <div class="workout__title">${
-              workout.typed
-            } on ${workout.description()}</div>
+            <div class="workout__title">${workout.typed} on ${
+        workout.description
+      }</div>
             <div class="workout__details">
               <div class="workout__details--distance">${
                 workout.typed === 'cycling' ? `🚴‍♀️` : `🏃‍♂️`
@@ -203,7 +207,9 @@ class App {
               <div class="workout__details--duration">🦶🏼 ${
                 workout.duration
               } MIN</div>
-              <div class="workout__details--speed">⚡️ ${workout.speed()} KM/H</div>
+              <div class="workout__details--speed">⚡️ ${
+                workout.speed
+              } KM/H</div>
               <div class="workout__details--cadence">⛰ ${
                 workout.cadence
               } M</div>
@@ -215,9 +221,9 @@ class App {
     if (workout.typed === 'cycling') {
       html = `
     <div class="workout bdr-${workout.typed}">
-            <div class="workout__title">${
-              workout.typed
-            } on ${workout.description()}</div>
+            <div class="workout__title">${workout.typed} on ${
+        workout.description
+      }</div>
             <div class="workout__details">
               <div class="workout__details--distance">${
                 workout.typed === 'cycling' ? `🚴‍♀️` : `🏃‍♂️`
@@ -225,7 +231,9 @@ class App {
               <div class="workout__details--duration">🦶🏼 ${
                 workout.duration
               } MIN</div>
-              <div class="workout__details--speed">⚡️ ${workout.speed()} KM/H</div>
+              <div class="workout__details--speed">⚡️ ${
+                workout.speed
+              } KM/H</div>
               <div class="workout__details--cadence">⛰ ${
                 workout.elevation
               } M</div>
@@ -250,13 +258,29 @@ class App {
         })
       )
       .setPopupContent(
-        `${workout.type === 'cycling' ? `🚴‍♀️` : `🏃‍♂️`} ${workout.description()}`
+        `${workout.type === 'cycling' ? `🚴‍♀️` : `🏃‍♂️`} ${workout.description}`
       )
       .openPopup();
   }
 
   _hideForm() {
     form.classList.add('formHidden');
+  }
+
+  _initLocalStorage() {
+    const workoutStored = localStorage.getItem('workouts');
+
+    if (!workoutStored) return;
+
+    this.#workouts = JSON.parse(workoutStored);
+
+    this.#workouts.forEach((workout) => {
+      this._renderWorkout(workout);
+    });
+  }
+
+  _setWorkoutLS() {
+    localStorage.setItem('workouts', JSON.stringify(this.#workouts));
   }
 }
 
